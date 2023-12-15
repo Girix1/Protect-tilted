@@ -50,9 +50,12 @@ ctx.arc(580, 105, 100, 0, 2 * Math.PI);
 ctx.arc(580, 100, 10, 0, 2 * Math.PI);
 ctx.stroke();
     
-window.onload = () => {
-    ctx.drawImage(battleBus, 100, 200, 200 , 200,)
-    setInterval(() =>{
 
+let busX = 200;
+
+window.onload = () => {
+    setInterval(() =>{
+        busX++;
+        ctx.drawImage(battleBus, 100, busX, 200 , 200,)
     }100)
 }
