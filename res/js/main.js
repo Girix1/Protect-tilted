@@ -3,6 +3,15 @@ const ctx = canvas.getContext("2d");
 const battleBus = new Image();
 battleBus.src = "./res/img/boss/battle_bus.png"
 
+let bossPaths = [
+    "./res/img/boss/battle_bus.png",
+    "./res/img/boss/BOSS.png",
+    "./res/img/boss/fnkid.png",
+    "./res/img/boss/kevin.png",
+    "./res/img/boss/mecha.png"
+]
+
+
 canvas.width = 1280;
 canvas.height = 720;
 
@@ -23,39 +32,47 @@ ctx.lineTo(100, 100);
 ctx.lineTo(100, 150);
 ctx.stroke();
 
-ctx.strokeStyle = "black";
-ctx.beginPath();
-ctx.moveTo(200, 50);
-ctx.lineTo(200, 100);
-ctx.lineTo(150, 100);
-ctx.lineTo(150, 150);
-ctx.stroke();
 
-ctx.strokeStyle = "black";
-ctx.beginPath();
-ctx.moveTo(50, 50);
-ctx.lineTo(200, 50);
-ctx.stroke();
-
-ctx.strokeStyle = "black";
-ctx.beginPath();
-ctx.moveTo(100, 150);
-ctx.lineTo(150, 150);
-ctx.stroke();
-
-
-ctx.strokeStyle = "blue";
-ctx.beginPath();
-ctx.arc(580, 105, 100, 0, 2 * Math.PI);
-ctx.arc(580, 100, 10, 0, 2 * Math.PI);
-ctx.stroke();
     
 
 let busX = 200;
+let busXVelocity = 1;
+
+let busY = 200;
+let busYVelocity = 1
+
+// {} - objekt (object)
+
+let bus = {
+    x:200,
+    y:200,
+    xVelocity: 1,
+    yVelocity: 1,
+}
 
 window.onload = () => {
     setInterval(() =>{
-        busX++;
-        ctx.drawImage(battleBus, 100, busX, 200 , 200,)
-    }100)
+    if(canvas.width <= bus.x + 200){
+        bus.xVelocity *= -1;
+        battleBus.src = bossPaths[1]
+    }
+    if(bus.x <= 0){
+        bus.xVelocity *= -1;
+        battleBus.src = bossPaths[3]
+    }
+    if(canvas.height <= bus.y + 200){
+        bus.yVelocity *= -1;
+        battleBus.src = bossPaths[2]
+    }
+    if(bus.y <= 0){
+        bus.yVelocity *= -1;
+        battleBus.src = bossPaths[4]
+        bossPaths[3] = bossPaths[0]
+    }
+        bus.x += bus.xVelocity;
+        bus.y += bus.yVelocity;
+        ctx.fillStyle = "white";
+        ctx.fillRect(0,0,1280,720)
+        ctx.drawImage(battleBus, bus.x, bus.y, 200 , 200,)
+    },1)
 }
