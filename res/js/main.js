@@ -52,4 +52,7 @@ ctx.stroke();
     
 window.onload = () => {
     ctx.drawImage(battleBus, 100, 200, 200 , 200,)
+    setInterval(() =>{
+
+    }100)
 }
